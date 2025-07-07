@@ -1,0 +1,25 @@
+{% extends 'layout.html' %}
+{% block title %}Nova Encomenda{% endblock %}
+{% block header %}BEM-VINDO(A) À GESTÃO DE ENCOMENDAS{% endblock %}
+
+{% block content %}
+<form action="{{ url_for('submeter') }}" method="POST" enctype="multipart/form-data" class="form">
+  <input type="text" name="nome" placeholder="Nome" required />
+  <input type="email" name="email" placeholder="Email" required />
+  <textarea name="descricao" placeholder="Descrição do quadro" required></textarea>
+  <input type="text" name="medidas" placeholder="Medidas (ex: 30x40cm)" required />
+  
+  <select name="material" required>
+    <option value="">Escolher material</option>
+    <option value="Tela">Tela</option>
+    <option value="Madeira">Madeira</option>
+  </select>
+
+  <label for="imagem">Imagem de referência (opcional):</label>
+  <input type="file" name="imagem" accept="image/*" />
+
+  <button type="submit">Submeter Encomenda</button>
+</form>
+
+<a href="{{ url_for('ver_encomendas') }}" class="link">Ver Encomendas</a>
+{% endblock %}

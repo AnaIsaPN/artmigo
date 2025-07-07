@@ -1,0 +1,50 @@
+{% extends 'layout.html' %}
+{% block title %}Lista de Encomendas{% endblock %}
+{% block header %}Encomendas Recebidas{% endblock %}
+
+{% block content %}
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Nome</th>
+    <th>Email</th>
+    <th>Descrição</th>
+    <th>Medidas</th>
+    <th>Material</th>
+    <th>Imagem</th>
+    <th>Estado</th>
+    <th>Ações</th>
+  </tr>
+  {% for e in encomendas %}
+  <tr>
+    <td>{{ e[0] }}</td>
+    <td>{{ e[1] }}</td>
+    <td>{{ e[2] }}</td>
+    <td>{{ e[3] }}</td>
+    <td>{{ e[4] }}</td>
+    <td>{{ e[5] }}</td>
+    <td>
+      {% if e[7] %}
+        <img src="{{ e[7] }}" alt="Imagem enviada" style="max-width: 100px; max-height: 100px;">
+      {% else %}
+        Sem imagem
+      {% endif %}
+    </td>
+    <td>{{ e[6] }}</td>
+    <td>
+      <form action="{{ url_for('atualizar_estado', id=e[0]) }}" method="POST">
+        <select name="estado">
+          <option {% if e[6] == 'Pendente' %}selected{% endif %}>Pendente</option>
+          <option {% if e[6] == 'Em produção' %}selected{% endif %}>Em produção</option>
+          <option {% if e[6] == 'Concluído' %}selected{% endif %}>Concluído</option>
+        </select>
+        <button type="submit">Atualizar</button>
+      </form>
+    </td>
+  </tr>
+  {% endfor %}
+</table>
+
+<a href="{{ url_for('index') }}" class="link">← Nova Encomenda</a>
+<a href="{{ url_for('logout') }}" class="link">Sair (Logout)</a>
+{% endblock %}
