@@ -1,0 +1,137 @@
+/* RESET */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: linear-gradient(to bottom, #000000, #40e0d0, #ffffff); /* preto → branco → azul turquesa */
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  color: #000;
+}
+
+/* Container com efeito de brilho */
+.container {
+  width: 100%;
+  max-width: 900px;
+  background: rgba(0, 0, 0, 0.75);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 20px rgba(64, 224, 208, 0.7);
+  margin: auto;
+}
+
+header h1, h2 {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+/* FORMULÁRIO */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: center;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+  width: 100%;
+  max-width: 500px;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+}
+
+/* BOTÕES */
+button, .link {
+  background-color: #40e0d0;
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 30px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  margin-top: 10px;
+  display: block;
+  text-align: center;
+}
+
+button:hover, .link:hover {
+  background-color: #2bb3a5;
+  box-shadow: 0 0 10px #40e0d0;
+}
+
+/* TABELA */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+th, td {
+  border: 1px solid #40e0d0;
+  padding: 10px;
+  text-align: center;
+}
+
+th {
+  background-color: #1a1a1a;
+}
+
+/* Estilo da imagem na tabela */
+img {
+  max-width: 80px;
+  max-height: 80px;
+  border-radius: 6px;
+}
+
+/* LOGOUT */
+.logout-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 20px;
+}
+
+/* RESPONSIVO */
+@media (max-width: 700px) {
+  .container {
+    padding: 20px;
+  }
+
+  input, select, textarea {
+    font-size: 0.9rem;
+  }
+
+  button, .link {
+    width: 100%;
+  }
+
+  table {
+    font-size: 0.85rem;
+  }
+
+  .logout-container {
+    justify-content: center;
+  }
+}

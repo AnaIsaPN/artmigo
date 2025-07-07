@@ -1,24 +1,29 @@
 <!DOCTYPE html>
 <html>
-<head>
+  <head>
     <title>Nova Encomenda</title>
-</head>
-<body>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+  </head>
+  <body>
     <h1>Nova Encomenda</h1>
     <form method="post">
-        Nome do cliente: <input type="text" name="cliente" required><br><br>
-        Descrição do quadro: <br>
-        <textarea name="descricao" rows="4" cols="50"></textarea><br><br>
-        Medidas (ex: 40x50 cm): <input type="text" name="medidas"><br><br>
-        Material (ex: acrílico, óleo, aquarela): <input type="text" name="material"><br><br>
-        Suporte:
-        <select name="suporte">
-            <option value="Tela">Tela</option>
-            <option value="Madeira">Madeira</option>
-        </select><br><br>
-        <input type="submit" value="Registar Encomenda">
+      Nome do cliente: <input type="text" name="cliente" required /><br /><br />
+      Descrição do quadro: <br />
+      <textarea name="descricao" rows="4" cols="50"></textarea><br /><br />
+      Medidas (ex: 40x50 cm): <input type="text" name="medidas" /><br /><br />
+      Material (ex: acrílico, óleo, aquarela):
+      <input type="text" name="material" /><br /><br />
+      Suporte:
+      <select name="suporte">
+        <option value="Tela">Tela</option>
+        <option value="Madeira">Madeira</option></select
+      ><br /><br />
+      <input type="submit" value="Registar Encomenda" />
     </form>
-    <br>
+    <br />
     <a href="/">Voltar</a>
-</body>
+  </body>
 </html>
