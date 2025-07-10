@@ -38,13 +38,17 @@
           {% endif %}
         </td>
         <td>
-          <form method="post" action="{{ url_for('atualizar_estado', id=e._id) }}">
+          <form method="post" action="{{ url_for('atualizar_estado', id=e._id) }}" style="display:inline;">
             <select name="estado" required>
               <option value="Pendente" {% if e.estado == 'Pendente' %}selected{% endif %}>Pendente</option>
               <option value="Em produção" {% if e.estado == 'Em produção' %}selected{% endif %}>Em produção</option>
               <option value="Finalizada" {% if e.estado == 'Finalizada' %}selected{% endif %}>Finalizada</option>
             </select>
             <button type="submit">Atualizar</button>
+          </form>
+
+          <form action="{{ url_for('apagar_encomenda', id=e._id) }}" method="post" style="display:inline;">
+            <button type="submit" onclick="return confirm('Tens a certeza que queres apagar esta encomenda?');">Apagar</button>
           </form>
         </td>
       </tr>

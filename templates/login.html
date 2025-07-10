@@ -1,13 +1,19 @@
 {% extends 'layout.html' %}
-{% block title %}Login{% endblock %}
-{% block header %}Login{% endblock %}
+{% block title %}Login - Gestão de Administradores{% endblock %}
+{% block header %}Área Restrita - Administração{% endblock %}
 
 {% block content %}
+<p>Bem-vindo à área de administradores. Caso você seja um administrador autorizado, por favor insira suas credenciais para acessar o sistema.</p>
+
 {% if erro %}
-<p style="color:red;">{{ erro }}</p>
+  <p style="color:red;">{{ erro }}</p>
 {% endif %}
-<form method="POST" class="form">
-    <input type="password" name="senha" placeholder="Digite a senha" required>
-    <button type="submit">Entrar</button>
+
+<form method="POST" class="form" autocomplete="off">
+    <input type="password" name="senha" placeholder="Digite sua senha" required autofocus>
+    <button type="submit" class="btn">Entrar</button>
 </form>
+
+<button type="button" class="btn" onclick="window.location='{{ url_for('index') }}'">Voltar para Página Inicial</button>
+
 {% endblock %}

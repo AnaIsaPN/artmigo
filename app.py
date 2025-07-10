@@ -1,13 +1,14 @@
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for, session, flash
 from bson.objectid import ObjectId
 from pymongo import MongoClient
 import cloudinary
 import cloudinary.uploader
-from flask import flash
-
+from translations import texts  # importar os textos
 
 app = Flask(__name__)
 app.secret_key = 'uma-chave-secreta-muito-segura-123!'
+
+
 
 # Configurações Cloudinary (para upload imagem)
 cloudinary.config(
@@ -21,7 +22,6 @@ MONGO_URI = "mongodb+srv://artisaart:IjhtH858vRVACKWH@cluster0.rki0ea1.mongodb.n
 client = MongoClient(MONGO_URI)
 db = client['artisaart']
 encomendas_col = db['encomendas']
-
 
 SENHA_ADMIN = "senha123"  # Altere para a senha que desejar
 
@@ -58,19 +58,26 @@ def submeter():
 
 @app.route('/encomendas', methods=['GET', 'POST'])
 def ver_encomendas():
-    if 'logged_in' in session and session['logged_in']:
-        encomendas = list(encomendas_col.find())
-        return render_template('encomendas.html', encomendas=encomendas)
-
     if request.method == 'POST':
         senha = request.form.get('senha')
         if senha == SENHA_ADMIN:
             session['logged_in'] = True
-            return redirect(url_for('ver_encomendas'))
         else:
             return render_template('login.html', erro="Senha incorreta. Tente novamente.")
 
-    return render_template('login.html')
+    if 'logged_in' not in session or not session['logged_in']:
+        return render_template('login.html')
+
+    encomendas = list(encomendas_col.find())
+    return render_template('encomendas.html', encomendas=encomendas)
+
+@app.route('/apagar/<id>', methods=['POST'])
+def apagar_encomenda(id):
+    if 'logged_in' not in session or not session['logged_in']:
+        return redirect(url_for('ver_encomendas'))
+
+    encomendas_col.delete_one({'_id': ObjectId(id)})
+    return redirect(url_for('ver_encomendas'))
 
 @app.route('/atualizar/<id>', methods=['POST'])
 def atualizar_estado(id):

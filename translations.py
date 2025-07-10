@@ -1,0 +1,60 @@
+texts = {
+    'pt': {
+        # Login
+        'login_title': 'Login - Gestão de Administradores',
+        'login_header': 'Área Restrita - Administração',
+        'welcome_msg': 'Bem-vindo à área de administradores. Caso você seja um administrador autorizado, por favor insira suas credenciais para acessar o sistema.',
+        'password_placeholder': 'Digite sua senha',
+        'login_button': 'Entrar',
+        'back_button': 'Voltar para Página Inicial',
+        'error_message': 'Senha incorreta. Tente novamente.',
+
+        # Encomendas
+        'orders_title': 'Lista de Encomendas',
+        'client': 'Cliente',
+        'email': 'Email',
+        'description': 'Descrição',
+        'measures': 'Medidas',
+        'material': 'Material',
+        'status': 'Estado',
+        'image': 'Imagem',
+        'update_status': 'Atualizar Estado',
+        'pending': 'Pendente',
+        'in_production': 'Em produção',
+        'finished': 'Finalizada',
+        'update_button': 'Atualizar',
+        'delete_button': 'Apagar',
+        'delete_confirm': 'Tens a certeza que queres apagar esta encomenda?',
+        'logout': 'Logout',
+        'order_submitted': 'Encomenda submetida com sucesso! Receberá confirmação por email.',
+    },
+    'en': {
+        # Login
+        'login_title': 'Login - Admin Management',
+        'login_header': 'Restricted Area - Administration',
+        'welcome_msg': 'Welcome to the admin area. If you are an authorized administrator, please enter your credentials to access the system.',
+        'password_placeholder': 'Enter your password',
+        'login_button': 'Log in',
+        'back_button': 'Back to Home Page',
+        'error_message': 'Incorrect password. Please try again.',
+
+        # Orders
+        'orders_title': 'Orders List',
+        'client': 'Client',
+        'email': 'Email',
+        'description': 'Description',
+        'measures': 'Measures',
+        'material': 'Material',
+        'status': 'Status',
+        'image': 'Image',
+        'update_status': 'Update Status',
+        'pending': 'Pending',
+        'in_production': 'In production',
+        'finished': 'Finished',
+        'update_button': 'Update',
+        'delete_button': 'Delete',
+        'delete_confirm': 'Are you sure you want to delete this order?',
+        'logout': 'Logout',
+        'order_submitted': 'Order submitted successfully! You will receive confirmation by email.',
+    }
+}
