@@ -1,6 +1,16 @@
 {% extends 'layout.html' %}
-{% block title %}Nova Encomenda{% endblock %}
-{% block header %}BEM-VINDO(A) À GESTÃO DE ENCOMENDAS{% endblock %}
+{% block title %}GESTÃO ARTMIGO{% endblock %}
+{% block header %}
+<div style="text-align: center; margin-bottom: 20px;">
+  <!-- <img 
+  src="{{ url_for('static', filename='img/logo.png') }}" 
+  alt="Logotipo ARTmigo" 
+style="width: 100%; max-width: 500px; height: auto;"
+/> -->
+  <p>BEM-VINDO(A) À GESTÃO DE ENCOMENDAS ARTMIGO</p>
+</div>
+{% endblock %}
+
 
 {% block content %}
 <form action="{{ url_for('submeter') }}" method="POST" enctype="multipart/form-data" class="form">
@@ -18,8 +28,21 @@
   <label for="imagem">Imagem de referência (opcional):</label>
   <input type="file" name="imagem" accept="image/*" />
 
+  
+
   <button type="submit">Submeter Encomenda</button>
 </form>
+
+{% with messages = get_flashed_messages() %}
+  {% if messages %}
+    <ul class="mensagens">
+      {% for message in messages %}
+        <li>{{ message }}</li>
+      {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+
 
 <a href="{{ url_for('ver_encomendas') }}" class="link">Ver Encomendas</a>
 {% endblock %}

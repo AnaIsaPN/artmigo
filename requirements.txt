@@ -3,3 +3,4 @@ pymongo
 dnspython
 gunicorn
 cloudinary
+Flask-Compress==1.13

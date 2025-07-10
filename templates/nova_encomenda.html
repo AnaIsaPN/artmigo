@@ -1,29 +1,46 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Nova Encomenda</title>
-    <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='styles.css') }}"
-    />
-  </head>
-  <body>
-    <h1>Nova Encomenda</h1>
-    <form method="post">
-      Nome do cliente: <input type="text" name="cliente" required /><br /><br />
-      Descrição do quadro: <br />
-      <textarea name="descricao" rows="4" cols="50"></textarea><br /><br />
-      Medidas (ex: 40x50 cm): <input type="text" name="medidas" /><br /><br />
-      Material (ex: acrílico, óleo, aquarela):
-      <input type="text" name="material" /><br /><br />
-      Suporte:
-      <select name="suporte">
-        <option value="Tela">Tela</option>
-        <option value="Madeira">Madeira</option></select
-      ><br /><br />
-      <input type="submit" value="Registar Encomenda" />
-    </form>
-    <br />
-    <a href="/">Voltar</a>
-  </body>
-</html>
+{% extends 'layout.html' %} {% block title %}GESTÃO ARTMIGO{% endblock %} {%
+block header %}
+<div style="text-align: center; margin-bottom: 20px">
+  <img
+    src="{{ url_for('static', filename='img/logo.png') }}"
+    alt="Logotipo ARTmigo"
+    style="max-width: 220px"
+  />
+  <h1 style="margin-top: 10px">GESTÃO ARTMIGO</h1>
+  <p>BEM-VINDO(A) À GESTÃO DE ENCOMENDAS ARTMIGO</p>
+</div>
+{% endblock %} {% block content %}
+<form
+  action="{{ url_for('submeter') }}"
+  method="POST"
+  enctype="multipart/form-data"
+  class="form"
+>
+  <input type="text" name="nome" placeholder="Nome" required />
+  <input type="email" name="email" placeholder="Email" required />
+  <textarea
+    name="descricao"
+    placeholder="Descrição do quadro"
+    required
+  ></textarea>
+  <input
+    type="text"
+    name="medidas"
+    placeholder="Medidas (ex: 30x40cm)"
+    required
+  />
+
+  <select name="material" required>
+    <option value="">Escolher material</option>
+    <option value="Tela">Tela</option>
+    <option value="Madeira">Madeira</option>
+  </select>
+
+  <label for="imagem">Imagem de referência (opcional):</label>
+  <input type="file" name="imagem" accept="image/*" />
+
+  <button type="submit">Submeter Encomenda</button>
+</form>
+
+<a href="{{ url_for('ver_encomendas') }}" class="link">Ver Encomendas</a>
+{% endblock %}

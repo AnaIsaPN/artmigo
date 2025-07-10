@@ -3,6 +3,8 @@ from bson.objectid import ObjectId
 from pymongo import MongoClient
 import cloudinary
 import cloudinary.uploader
+from flask import flash
+
 
 app = Flask(__name__)
 app.secret_key = 'uma-chave-secreta-muito-segura-123!'
@@ -19,6 +21,7 @@ MONGO_URI = "mongodb+srv://artisaart:IjhtH858vRVACKWH@cluster0.rki0ea1.mongodb.n
 client = MongoClient(MONGO_URI)
 db = client['artisaart']
 encomendas_col = db['encomendas']
+
 
 SENHA_ADMIN = "senha123"  # Altere para a senha que desejar
 
@@ -50,6 +53,7 @@ def submeter():
         'imagem_url': imagem_url
     }
     encomendas_col.insert_one(encomenda)
+    flash("Encomenda submetida com sucesso! Receberá confirmação por email.")
     return redirect(url_for('index'))
 
 @app.route('/encomendas', methods=['GET', 'POST'])
