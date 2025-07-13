@@ -3,27 +3,27 @@ from bson.objectid import ObjectId
 from pymongo import MongoClient
 import cloudinary
 import cloudinary.uploader
-from translations import texts  # importar os textos
+from translations import texts  # ficheiro para tradução
 
 app = Flask(__name__)
 app.secret_key = 'uma-chave-secreta-muito-segura-123!'
 
 
 
-# Configurações Cloudinary (para upload imagem)
+# Configurações Cloudinary 
 cloudinary.config(
     cloud_name='dnm3u3f1p',
     api_key='764794684413156',
     api_secret='K-nMTYb_8gXGKHoV9MXS2YQhI4k'
 )
 
-# Configurações MongoDB (substitua pela sua string de conexão)
+# Configurações MongoDB 
 MONGO_URI = "mongodb+srv://artisaart:IjhtH858vRVACKWH@cluster0.rki0ea1.mongodb.net/"
 client = MongoClient(MONGO_URI)
 db = client['artisaart']
 encomendas_col = db['encomendas']
 
-SENHA_ADMIN = "senha123"  # Altere para a senha que desejar
+SENHA_ADMIN = "senha123" 
 
 @app.route('/')
 def index():
