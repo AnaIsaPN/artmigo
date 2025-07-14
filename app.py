@@ -3,12 +3,10 @@ from bson.objectid import ObjectId
 from pymongo import MongoClient
 import cloudinary
 import cloudinary.uploader
-from translations import texts  # ficheiro para tradução
+from translations import texts, get_translation  # Importar texts e get_translation
 
 app = Flask(__name__)
 app.secret_key = 'uma-chave-secreta-muito-segura-123!'
-
-
 
 # Configurações Cloudinary 
 cloudinary.config(
@@ -23,19 +21,28 @@ client = MongoClient(MONGO_URI)
 db = client['artisaart']
 encomendas_col = db['encomendas']
 
-SENHA_ADMIN = "senha123" 
+SENHA_ADMIN = "senha123"
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    lang = session.get('lang', 'pt')
+    print(f"Idioma atual: {lang}")  # Log para depuração
+    return render_template('index.html', t=lambda key: get_translation(lang, key))
+
+@app.route('/set_language/<lang>')
+def set_language(lang):
+    if lang in ['pt', 'en']:
+        session['lang'] = lang
+    return redirect(url_for('index'))
 
 @app.route('/submeter', methods=['POST'])
 def submeter():
-    nome = request.form['nome']
-    email = request.form['email']
-    descricao = request.form['descricao']
-    medidas = request.form['medidas']
-    material = request.form['material']
+    lang = session.get('lang', 'pt')
+    nome = request.form.get('nome')  # Usar .get para evitar KeyError
+    email = request.form.get('email')
+    descricao = request.form.get('descricao')
+    medidas = request.form.get('medidas')
+    material = request.form.get('material')
     imagem = request.files.get('imagem')
 
     imagem_url = None
@@ -53,23 +60,24 @@ def submeter():
         'imagem_url': imagem_url
     }
     encomendas_col.insert_one(encomenda)
-    flash("Encomenda submetida com sucesso! Receberá confirmação por email.")
+    flash(get_translation(lang, 'order_submitted'))  # Usar mensagem traduzida
     return redirect(url_for('index'))
 
 @app.route('/encomendas', methods=['GET', 'POST'])
 def ver_encomendas():
+    lang = session.get('lang', 'pt')
     if request.method == 'POST':
         senha = request.form.get('senha')
         if senha == SENHA_ADMIN:
             session['logged_in'] = True
         else:
-            return render_template('login.html', erro="Senha incorreta. Tente novamente.")
+            return render_template('login.html', erro=get_translation(lang, 'error_message'), t=lambda key: get_translation(lang, key))
 
     if 'logged_in' not in session or not session['logged_in']:
-        return render_template('login.html')
+        return render_template('login.html', t=lambda key: get_translation(lang, key))
 
     encomendas = list(encomendas_col.find())
-    return render_template('encomendas.html', encomendas=encomendas)
+    return render_template('encomendas.html', encomendas=encomendas, t=lambda key: get_translation(lang, key))
 
 @app.route('/apagar/<id>', methods=['POST'])
 def apagar_encomenda(id):

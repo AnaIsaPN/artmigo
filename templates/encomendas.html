@@ -1,24 +1,24 @@
 {% extends 'layout.html' %}
-{% block title %}Encomendas{% endblock %}
-{% block header %}Lista de Encomendas{% endblock %}
+{% block title %}{{ t('orders_title') }}{% endblock %}
+{% block header %}{{ t('orders_title') }}{% endblock %}
 
 {% block content %}
 <div class="logout-container">
-  <a href="{{ url_for('logout') }}" class="link">Logout</a>
+  <a href="{{ url_for('logout') }}" class="link">{{ t('logout') }}</a>
 </div>
 
 <div class="table-wrapper">
   <table>
     <thead>
       <tr>
-        <th>Cliente</th>
-        <th>Email</th>
-        <th>Descrição</th>
-        <th>Medidas</th>
-        <th>Material</th>
-        <th>Estado</th>
-        <th>Imagem</th>
-        <th>Atualizar Estado</th>
+        <th>{{ t('client') }}</th>
+        <th>{{ t('email') }}</th>
+        <th>{{ t('description') }}</th>
+        <th>{{ t('measures') }}</th>
+        <th>{{ t('material') }}</th>
+        <th>{{ t('status') }}</th>
+        <th>{{ t('image') }}</th>
+        <th>{{ t('update_status') }}</th>
       </tr>
     </thead>
     <tbody>
@@ -29,10 +29,20 @@
         <td>{{ e.descricao }}</td>
         <td>{{ e.medidas }}</td>
         <td>{{ e.material }}</td>
-        <td>{{ e.estado }}</td>
+        <td>
+          {% if e.estado == 'Pendente' %}
+            {{ t('pending') }}
+          {% elif e.estado == 'Em produção' %}
+            {{ t('in_production') }}
+          {% elif e.estado == 'Finalizada' %}
+            {{ t('finished') }}
+          {% else %}
+            {{ e.estado }}
+          {% endif %}
+        </td>
         <td>
           {% if e.imagem_url %}
-            <img src="{{ e.imagem_url }}" alt="Imagem">
+            <img src="{{ e.imagem_url }}" alt="{{ t('image') }}">
           {% else %}
             -
           {% endif %}
@@ -40,15 +50,15 @@
         <td>
           <form method="post" action="{{ url_for('atualizar_estado', id=e._id) }}" style="display:inline;">
             <select name="estado" required>
-              <option value="Pendente" {% if e.estado == 'Pendente' %}selected{% endif %}>Pendente</option>
-              <option value="Em produção" {% if e.estado == 'Em produção' %}selected{% endif %}>Em produção</option>
-              <option value="Finalizada" {% if e.estado == 'Finalizada' %}selected{% endif %}>Finalizada</option>
+              <option value="Pendente" {% if e.estado == 'Pendente' %}selected{% endif %}>{{ t('pending') }}</option>
+              <option value="Em produção" {% if e.estado == 'Em produção' %}selected{% endif %}>{{ t('in_production') }}</option>
+              <option value="Finalizada" {% if e.estado == 'Finalizada' %}selected{% endif %}>{{ t('finished') }}</option>
             </select>
-            <button type="submit">Atualizar</button>
+            <button type="submit">{{ t('update_button') }}</button>
           </form>
 
           <form action="{{ url_for('apagar_encomenda', id=e._id) }}" method="post" style="display:inline;">
-            <button type="submit" onclick="return confirm('Tens a certeza que queres apagar esta encomenda?');">Apagar</button>
+           <button type="submit" onclick="return confirm(`{{ t('delete_confirm') }}`);">{{ t('delete_button') }}</button>
           </form>
         </td>
       </tr>

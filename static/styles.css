@@ -155,3 +155,29 @@ img {
     justify-content: center;
   }
 }
+
+
+/* Seletor de Idioma */
+.language-selector {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.language-selector a {
+  color: #91d1cb;
+  text-decoration: none;
+  margin: 0 10px;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.language-selector a:hover {
+  color: #40e0d0;
+  text-shadow: 0 0 5px rgba(64, 224, 208, 0.7);
+}
+
+.language-selector a.active {
+  font-weight: bold;
+  color: #40e0d0;
+  text-decoration: underline;
+}

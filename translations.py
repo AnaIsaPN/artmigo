@@ -1,6 +1,5 @@
 texts = {
     'pt': {
-        # Login
         'login_title': 'Login - Gestão de Administradores',
         'login_header': 'Área Restrita - Administração',
         'welcome_msg': 'Bem-vindo à área de administradores. Caso você seja um administrador autorizado, por favor insira suas credenciais para acessar o sistema.',
@@ -8,8 +7,6 @@ texts = {
         'login_button': 'Entrar',
         'back_button': 'Voltar para Página Inicial',
         'error_message': 'Senha incorreta. Tente novamente.',
-
-        # Encomendas
         'orders_title': 'Lista de Encomendas',
         'client': 'Cliente',
         'email': 'Email',
@@ -27,9 +24,25 @@ texts = {
         'delete_confirm': 'Tens a certeza que queres apagar esta encomenda?',
         'logout': 'Logout',
         'order_submitted': 'Encomenda submetida com sucesso! Receberá confirmação por email.',
+        # Novas chaves para o formulário
+        'name_placeholder': 'Nome',
+        'email_placeholder': 'Email',
+        'description_placeholder': 'Descrição do quadro',
+        'measures_placeholder': 'Medidas (ex: 30x40cm)',
+        'material_label': 'Escolher material',
+        'material_option_canvas': 'Tela',
+        'material_option_wood': 'Madeira',
+        'image_label': 'Imagem de referência (opcional - excepto em caso de retratos ou equivalentes)',
+        'submit_button': 'Submeter Encomenda',
+        'admin_area_link': 'Área de Administração',
+        'welcome_header': 'BEM-VINDO(A) À GESTÃO DE ENCOMENDAS ARTMIGO',
+        'error_name_required': 'Por favor, preencha o campo Nome.',
+        'error_email_required': 'Por favor, preencha o campo Email.',
+        'error_description_required': 'Por favor, preencha o campo Descrição.',
+        'error_measures_required': 'Por favor, preencha o campo Medidas.',
+        'error_material_required': 'Por favor, selecione um material.'
     },
     'en': {
-        # Login
         'login_title': 'Login - Admin Management',
         'login_header': 'Restricted Area - Administration',
         'welcome_msg': 'Welcome to the admin area. If you are an authorized administrator, please enter your credentials to access the system.',
@@ -37,8 +50,6 @@ texts = {
         'login_button': 'Log in',
         'back_button': 'Back to Home Page',
         'error_message': 'Incorrect password. Please try again.',
-
-        # Orders
         'orders_title': 'Orders List',
         'client': 'Client',
         'email': 'Email',
@@ -56,5 +67,28 @@ texts = {
         'delete_confirm': 'Are you sure you want to delete this order?',
         'logout': 'Logout',
         'order_submitted': 'Order submitted successfully! You will receive confirmation by email.',
+        'name_placeholder': 'Name',
+        'email_placeholder': 'Email',
+        'description_placeholder': 'Painting description',
+        'measures_placeholder': 'Measures (e.g., 30x40cm)',
+        'material_label': 'Choose material',
+        'material_option_canvas': 'Canvas',
+        'material_option_wood': 'Wood',
+        'image_label': 'Reference image (optional - except for portraits or similar)',
+        'submit_button': 'Submit Order',
+        'admin_area_link': 'Administration Area',
+        'welcome_header': 'WELCOME TO ARTMIGO ORDER MANAGEMENT',
+        'error_name_required': 'Please fill out the Name field.',
+        'error_email_required': 'Please fill out the Email field.',
+        'error_description_required': 'Please fill out the Description field.',
+        'error_measures_required': 'Please fill out the Measures field.',
+        'error_material_required': 'Please select a material.'
     }
 }
+
+def get_translation(lang, key):
+    """Obtém a tradução para a chave especificada no idioma escolhido"""
+    try:
+        return texts[lang][key]
+    except KeyError:
+        return f"[{key}]"  # Retorna a chave entre colchetes se não encontrar a tradução

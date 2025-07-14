@@ -1,19 +1,24 @@
 {% extends 'layout.html' %}
-{% block title %}Login - Gestão de Administradores{% endblock %}
-{% block header %}Área Restrita - Administração{% endblock %}
+{% block title %}{{ t('login_title') }}{% endblock %}
+{% block header %}{{ t('login_header') }}{% endblock %}
 
 {% block content %}
-<p>Bem-vindo à área de administradores. Caso seja um administrador autorizado, por favor insira as credenciais para aceder ao sistema.</p>
+<p>{{ t('welcome_msg') }}</p>
 
 {% if erro %}
   <p style="color:red;">{{ erro }}</p>
 {% endif %}
 
 <form method="POST" class="form" autocomplete="off">
-    <input type="password" name="senha" placeholder="Digite sua senha" required autofocus>
-    <button type="submit" class="btn">Entrar</button>
+    <input type="password" name="senha" placeholder="{{ t('password_placeholder') }}" required autofocus>
+    <button type="submit" class="btn">{{ t('login_button') }}</button>
 </form>
 
-<button type="button" class="btn" onclick="window.location='{{ url_for('index') }}'">Voltar para Página Inicial</button>
+<button type="button" class="btn" id="backButton">{{ t('back_button') }}</button>
 
+<script>
+    document.getElementById('backButton').addEventListener('click', function() {
+        window.location.href = "{{ url_for('index') }}";
+    });
+</script>
 {% endblock %}

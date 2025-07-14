@@ -1,32 +1,39 @@
 {% extends 'layout.html' %}
-{% block title %}GESTÃO ARTMIGO{% endblock %}
+{% block title %}{{ t('orders_title') }}{% endblock %}
 {% block header %}
 <div style="text-align: center; margin-bottom: 20px;">
-
-  <p>BEM-VINDO(A) À GESTÃO DE ENCOMENDAS ARTMIGO</p>
+  <p>{{ t('welcome_header') }}</p>
 </div>
 {% endblock %}
 
-
 {% block content %}
+<!-- Seletor de Idioma -->
+<div class="language-selector">
+  <small>
+    <a href="{{ url_for('set_language', lang='pt') }}" 
+       class="{% if session.get('lang', 'pt') == 'pt' %}active{% endif %}">
+      PT
+    </a> | 
+    <a href="{{ url_for('set_language', lang='en') }}" 
+       class="{% if session.get('lang', 'pt') == 'en' %}active{% endif %}">
+      ENG
+    </a>
+  </small>
+</div>
+
 <form action="{{ url_for('submeter') }}" method="POST" enctype="multipart/form-data" class="form">
-  <input type="text" name="nome" placeholder="Nome" required />
-  <input type="email" name="email" placeholder="Email" required />
-  <textarea name="descricao" placeholder="Descrição do quadro" required></textarea>
-  <input type="text" name="medidas" placeholder="Medidas (ex: 30x40cm)" required />
-
+  <input type="text" name="nome" placeholder="{{ t('name_placeholder') }}" required />
+  <input type="email" name="email" placeholder="{{ t('email_placeholder') }}" required />
+  <textarea name="descricao" placeholder="{{ t('description_placeholder') }}" required></textarea>
+  <input type="text" name="medidas" placeholder="{{ t('measures_placeholder') }}" required />
   <select name="material" required>
-    <option value="">Escolher material</option>
-    <option value="Tela">Tela</option>
-    <option value="Madeira">Madeira</option>
+    <option value="">{{ t('material_label') }}</option>
+    <option value="Tela">{{ t('material_option_canvas') }}</option>
+    <option value="Madeira">{{ t('material_option_wood') }}</option>
   </select>
-
-  <label for="imagem">Imagem de referência (opcional - excepto em caso de retratos ou equivalentes):</label>
+  <label for="imagem">{{ t('image_label') }}:</label>
   <input type="file" name="imagem" accept="image/*" />
-
-  
-
-  <button type="submit">Submeter Encomenda</button>
+  <button type="submit">{{ t('submit_button') }}</button>
 </form>
 
 {% with messages = get_flashed_messages() %}
@@ -39,6 +46,5 @@
   {% endif %}
 {% endwith %}
 
-
-<a href="{{ url_for('ver_encomendas') }}" class="link">Área de Administração</a>
+<a href="{{ url_for('ver_encomendas') }}" class="link">{{ t('admin_area_link') }}</a>
 {% endblock %}
